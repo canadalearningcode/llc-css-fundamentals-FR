@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Ladies Learning Code: CSS Fundamentals</title>
+
+    <!-- Don't alter slideshow.css, CSSS slide deck needs it to work -->
+    <link rel="stylesheet" href="framework/css/slideshow.css">
+
+    <!-- Theme-specific styles -->
+    <link href='http://fonts.googleapis.com/css?family=Quicksand|Pacifico|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="framework/css/font-awesome.css">
+    <link rel="stylesheet" href="framework/css/highlightjs-themes/monokai.css">
+    <link rel="stylesheet" href="framework/css/theme-llc.css">
+    <link rel="shortcut icon" href="framework/img/favicon.ico"> 
+
+    <!-- Workshop-specific styles -->
+    <link rel="stylesheet" href="framework/css/workshop.css">
+    <link rel="stylesheet" href="framework/css/pdf.css" media="print">
+
+    <!-- Takes care of CSS3 prefixes! -->
+    <script src="framework/scripts/prefixfree.min.js"></script>
+</head>
+
+<!-- Timer/progress bar: Define the presentation duration using "data-duration" in minutes. -->
+<body data-duration="360">
+    
+    <!-- makes all links open in a new window -->
+    <base target="_blank">
+
+    <!-- First/Intro slide -->
+    <header class="intro slide">
+        <img class="logo" src="framework/img/logo-llc-white.png">
+        <div class="info">
+            <h1>
+                <span class="title-bg">Les bases du CSS</span><br>
+                <!-- if needed -->
+                <span class="title-bg">Pour les débutantes</span>
+            </h1>
+            <h2><span>with</span>Ziad Saab</h2>
+
+            <img class="instructor-img" src="framework/img/ziad.jpg" alt="Instructor Name">
+            <ul>
+                <li><i class="fa fa-envelope"></i><a href="mailto:ziad.saab@gmail.com">ziad.saab@gmail.com</a></li>
+                <li><i class="fa fa-desktop"></i><a href="http://www.decodemtl.com/">www.decodemtl.com</a></li>
+                <li><i class="fa fa-twitter"></i><a href="https://twitter.com/ZiadDotHTML">@ZiadDotHTML</a></li>
+            </ul>
+        </div>
+        <div class="presenter-notes">
+            <p>It's important to note at the beginning that a lot of material will be covered and their page will not be 100% complete by the end of the day. The goal of the day is to learn about the concepts but they will have most of the page done by the end of the day. "Homework" and additional resources are provided at the end to help them complete their project.</p>
+            <p>All code blocks in white are editable and CSS changes will be reflected in the slide.  For exercises, all instructions listed under <strong>bonus</strong> are for those who complete the exercises early to make sure learners at all different levels have something to work on.</p>
+        </div>
+    </header>
+    <main>
+        <section class="slide centered" data-markdown>
+            ##Votre futur projet
+
+            Suivez [ce lien](project/final.html) Pour voir le projet en entier!
+            
+            ![Projet final](framework/img/workshop/final-project.jpg)  
+        </section>
+
+        <section class="slide centered" data-markdown>
+            ##Voici un exemple de ce qui peut être
+            ##accompli grâce à un design en CSS !
+
+            ![](framework/img/workshop/css-zen-garden.png)
+
+            http://csszengarden.com/
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Préparons nos outils de développement
+
+            **[Sublime Text](http://www.sublimetext.com)** - Un éditeur de texte (code) simple et rempli d'outils forts utiles. Si vous êtes incapable de l'installer essayez avec [Notepad++](http://notepad-plus-plus.org/) (Windows) ou [Atom](https://atom.io/) (Mac).
+
+            **[Google Chrome](https://www.google.com/intl/en-CA/chrome/browser/)** - Choisissez un navigateur moderne qui supporte les standards du web et qui possède d'excellents outils de développement. Pour faire de Chrome votre navigateur par défaut suivez [ces instructions](https://support.google.com/chrome/answer/95417?hl=fr). Pour une autre bonne option, essayez Firefox. Visitez [browsehappy.com](http://browsehappy.com) pour plus d'infos sur les navigateurs modernes.
+
+            ** Outils de développement/*Developer tools* ** Nous permet d'*inspecter* n'importe quelle page web afin d'étudier sa charpente. Ces outils sont aussi très pratiques pour tester et déboguer votre code. On peut accéder à ces outils de 3 façons:
+            
+            * Clique droit, puis sélectionnez **Inspect Element**
+            * Sélectionnez l'icône Menu en haut à droite dans le navigateur Chrome et sélectionnez **Affichez > Options pour les développeurs > Outils de développements**
+            * Raccourci du clavier: **Ctrl + Shift + I** (PC) / **Cmnd + Option + I** (Mac)
+        </section>
+        <section class="slide" data-markdown>
+            ##Préparons-nous à travailler
+
+            Dans le dossier que vous avez téléchargé (**llc-css-fundamentals-master**) il y a plusieurs dossiers et fichiers dont les contenus diffèrent.
+            
+            ```
+            llc-css-fundamentals-master
+                |-- framework // Contient les fichiers nécessaires pour cette présentation. Ne pas modifier !
+                |-- project // Contient les fichiers nécessaires pour l'atelier d'aujourd'hui.
+                    |-- css // Contient seulement les fichiers CSS.
+                    |-- examples // Des exemples de fichiers HTML & CSS files pour chaque exercice.
+                    |-- images // Contient les images de votre site. Vous pouvez aussi en ajouter, ici.
+                    |-- final.html // Des exemples terminés, à titre de référence. Les fichiers CSS sont dans le dossier CSS.
+                    |-- index.html // Votre page HTML.
+                |-- index.html // C'est la présentation que vous consultez en ce moment (les diapos)!
+            ```
+        </section>
+        <section class="slide" data-markdown>
+            ##Préparons-nous à travailler
+
+            Ouvrons nos fichiers de projet dans un navigateur et dans notre éditeur de code.
+
+            1. Ouvrez Sublime Text et cliquez sur **File > Open**.
+
+                ![](framework/img/workshop/1-setup.png)
+            1. Sélectionnez le dossier **Project** (dans le dossier que vous avez téléchargé aujourd'hui). Sélectionner le dossier en entier et cliquez **Open**.
+                <!-- ![](framework/img/workshop/2-setup.png) -->
+            1. Le contenu du dossier apparaîtra dans la section de gauche de Sublime. Double cliquez sur **index.html** pour l'ouvrir.
+                <!-- ![](framework/img/workshop/3-setup.png) -->
+            1. Clique droit et sélectionnez **Open in Browser**. Cette action ouvrira le fichier HTML dans votre navigateur habituel.
+
+                ![](framework/img/workshop/4-setup.png)
+
+            Aucun CSS n'a été appliqué à cette étape, tout ce que vous verrez est du contenu HTML et son style par défaut comme dans [cet exemple](project/examples/1-no-css.html).
+        </section>
+
+        <section class="slide title" data-markdown>
+            #hypertext markup language
+            ##L'étape du contenu.
+        </section>
+
+        <section class="slide" data-markdown>
+            ##HTML: Petit rappel
+            
+            HTML sert à définir le **contenu** et les balises HTML servent à décrire les différents types de contenu.
+
+            **Title**: se trouve dans la section `&lt;head>` de votre document HTML. Il sert à définir le titre de votre page. Il parait dans l'onglet de votre navigateur, dans les résultats de moteurs de recherche et dans les favoris/*bookmarks*.
+            
+            ```xml
+            &lt;title&gt;Titre de ma page&lt;/title&gt;
+            ```
+
+            **Headings**: Il existe 6 niveaux de balise d'entête (*heading*) (`&lt;h1&gt;,&lt;h2&gt;,...,&lt;h6&gt;`) et elles suivent un ordre hiérarchique. `&lt;h1&gt;` represente le titre le plus important de votre page, il vaut mieux l'utiliser qu'une fois. Les autres peuvent être réutilisés dans une même page. Il est important d'utiliser les bonnes balises avec le contenu approprié. Ces balises ont un rôle d'identification seulement, pas de style. 
+
+            NB: Une balise, en anglais c'est un *tag*.
+
+            ```xml
+            &lt;h1&gt;Entête importante&lt;/h1&gt;
+            &lt;h2&gt;Entête moins importante que h1, mais importante quand même.&lt;/h2&gt;
+            ```
+
+            **Paragraphs**: Créé avec les balises `&lt;p&gt;&lt;/p&gt;`.
+            ```xml
+            &lt;p&gt;Je suis un paragraphe.&lt;/p&gt;
+            ```
+
+            **Lien**: requiers l'ajout d'un **attribut ** `href` pour préciser la direction du lien.
+            
+            ```
+            &lt;a href=&quot;http://siteweb.com&quot;&gt;lien&lt;/a&gt;
+            ```
+
+            **Listes**: il existe 3 types de liste: ordonnées (`ol`) pour une liste numérotée et non ordonnée (`ul`) pour une liste avec des puces. Les items des listes doivent être définis comme des éléments de liste par des (`li`).
+            
+            ```xml
+            &lt;ul&gt;
+                &lt;li&gt;Élément de liste non-ordonée&lt;/li&gt;
+                &lt;li&gt;Élément de liste non-ordonée&lt;/li&gt;
+            &lt;/ul&gt;
+            &lt;ol&gt;
+                &lt;li&gt;Élément de liste ordonée&lt;/li&gt;
+                &lt;li&gt;Élément de liste ordonée&lt;/li&gt;
+            &lt;/ol&gt;
+            ```
+            Il existe aussi les liste de définitions (`dl`) où on peut définir des éléments (`dt`) et leurs définitions (`dd`).
+
+            ```xml
+            &lt;dl&gt;
+                &lt;dt&gt;Titre d'un element&lt;/dt&gt;
+                &lt;dd&gt;Définition de l'élément&lt;/dd&gt;
+            &lt;/dl&gt;
+            
+            ```
+            **Images**: comme les liens, cette balise requiert l'usage d'un attribut `src`, cette fois, pour définir la source de l'image ajoutée. On peut utiliser des .jpg, des .jpeg, .png et des .gif .
+
+            ```
+            &lt;img src=&quot;chemin/vers/image.jpg&quot;&gt;
+            ```
+        </section>
+        <section class="slide">
+            <h2>Exercice #1: Personaliser le contenu (5-10 mins)</h2>
+
+            <ol>
+                <li>Modifiez le titre de la page entre les balises <code>title</code>.</li>
+                <li>Modifiez votre nom et l'entête dans la section <code>header</code>.</li>
+                <li>Modifiez l'image de profil.</li>
+            </ol>
+
+            <p><strong>Bonus:</strong> Si vous avez le temps, essayer de personnaliser le contenu du reste de la page.</p>
+
+            <p>N'oubliez pas de sauvegarder vos changements (<strong>File &gt; Save</strong>)  et rafraichir votre page dans votre navigateur à chaque changement. Ne vous en faites pas si vous n'avez pas fini. Il y a déjà du contenu dans le modèle de base.</p>
+
+            <p><strong>Truc de pro!</strong> Sauvez du temps grâce aux raccourcis du clavier :  </p>
+
+            <p><strong>CMD/CTRL + S</strong> pour sauvegarder.<br>
+            <strong>CMD/CTRL + R</strong> pour rafraichir votre navigateur.</p>
+
+            <div class="presenter-notes">
+                Give the class 5 mins and then check if they completed #1-3. If not give them 5 more minutes.
+            </div>
+        </section>
+
+        <section class="slide title" data-markdown>
+            #Cascading Style Sheets
+            ##L'étape du style !
+        </section>
+
+        <section class="slide" data-markdown>
+            ##CSS, en bref
+
+            Le HTML définit le **contenu**, le CSS définit l'apparence, le **style**.
+
+            **Sélecteur/ (*Selectors*):** Utilisé pour déterminer quel(s) élément(s) nous allons styliser. Vous pouvez cibler une balise HTML, une classe ou un ID (on va le voir plus tard).
+
+            **Bloc de déclaration/ (*Declaration block*):** C'est une liste de déclarations (règles à suivre) entourées d'accolades.
+ 
+            **Règle ou déclaration/ (*Declarations*)** Elles sont les règles à suivre. Elles sont toujours composées d'une propriété et d'une valeur.
+
+            ```css
+            selector {
+                property: value;
+            }
+            ```
+            **Propriété/ (*Properties*))** Détermine le type de style appliqué à l'élément (ex: color).  
+            **Valeur/ (*Values*)** Sont spécifiques à la propriété. Les déclarations doivent toujours se terminer par un (`;`)  pour indiquer que l'instruction est complète.
+
+            
+            ![](framework/img/workshop/css.png)
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Commentaires
+
+             Les commentaires en CSS sont écrits entre des barres obliques et des astérisques et doivent se clore dans l'ordre inverse. Les commentaires servent évidemment à laisser... des commentaires. Ils peuvent être des notes pour vous et pour les autres, servir à organiser votre code en blocs, ou encore permettre de *commenter* votre code (en cacher des portions, pour plus tard).
+            
+            ```
+            p {
+                color: #cc0066; /* magenta */
+            }
+
+            /* STYLE POUR LES ENTÊTES */
+            header {
+                width: 80%;
+            }
+
+            /*  À garder pour plus tard...
+            .slider {
+                width: 100px;
+                background: red;
+            }
+            */ 
+            ``` 
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Les attributs Class & ID 
+            
+            Quand les **sélecteurs** sont trop généraux (comme lorsqu'on cible des balises HTML), le HTML nous permet de mieux identifier nos éléments de 2 façons différentes : l'ajout d' **attributs** `class` qui peuvent être utilisés plusieurs fois et `id` qui peuvent être utilisés une seule fois par page.
+             
+
+            ``` 
+            /* targets ALL parapraphs */
+            p {
+                color: blue;
+            }
+            /* s'applique seulement aux éléments qui portent cette classe, définie par un point. */
+            .danger {
+                color: red;
+            }
+            /* s'applique seulement aux éléments qui portent cet id, définit par ce symbole.  */
+            #danger {
+                border: 1px solid red;
+            }
+            ```
+
+            ```xml   
+            &lt;p&gt;Texte régulier.&lt;/p&gt;
+&lt;p class=&quot;danger&quot;&gt;Message d'erreur en rouge !!&lt;/p&gt;
+&lt;div id="danger"&gt;une bordure rouge.&lt;/div&gt;
+            ```
+            NB: la bonne pratique est d'éviter d'utiliser des id dans son CSS parce que ce sont des règles qui seront difficiles à gérer ensuite.
+        </section>
+        <!-- <section class="slide" data-markdown>
+            ##Class Selectors
+
+            A `class` **attribute** can be added to any element but the value is defined by you.  The class can then be used as a selector to apply styles to *any* element that references the class attribute. In CSS, a `class` selector is defined by a leading period (`.`) followed by the class name with *no* spaces as your CSS selector. 
+            Classes can be used multiple times on the same page. 
+
+            ```xml
+            &lt;p&gt;Regular text&lt;/p&gt;
+&lt;p&gt;Regular text&lt;/p&gt;
+&lt;p class=&quot;fancy&quot;&gt;Fancy text here.&lt;/p&gt;
+            ```
+            ```
+            p {
+                color: red;
+                font-family: Georgia, "Times New Roman", serif;
+            }
+            .fancy {
+                text-transform: uppercase;
+            }
+            ```
+        </section>
+        <section class="slide" data-markdown>
+            ##id Selectors
+
+            `id` **attributes** are similar to `class` **attributes** because it can also be added to any element and given any value.
+
+            However, it can be used only *once* per page.  IDs should be used for significant style rules and is usually reserved for structural blocks. Some developers prefer not to use IDs at all for CSS styling because of specificity rules and classes can be used multiple times, making it more flexible.
+
+            In CSS, IDs are denoted by a leading number symbol (`#`).
+            ```
+            #header {
+                width: 800px;
+            }
+            ```
+        </section> -->
+        <section class="slide" data-markdown>
+            ##class & id : convention dans les noms
+
+            Lorsqu'on choisi un nom de `class` ou d' `id`, on utilise un nom descriptif et sans espace. Des tirets (*hyphens*) (-), des barres de soulignements (*underscores*) (_) et les CamelCase sont de mise. 
+
+            Le CSS est aussi sensible à la casse, donc bien que nos 3 exemples soient semblables le CSS les lira différemment. Il est important (pour votre santé mentale) de choisir une convention et de s'y tenir. 
+            
+            ```
+            class="content-wrapper"
+            class="content_wrapper"
+            class="contentWrapper"
+            ```
+        </section>
+            
+        <section class="slide" data-markdown>
+            ##CSS: les valeurs de couleurs
+
+            **Mots clés** - Utiliser le réel nom de la couleur de base **en anglais, toujours**(red, green, blue, pink, etc). Il y en a même de surprenants comme "papayaWhip" et "paleGoldenrod"!
+            
+            **RGB (red-green-blue)** - Utiliser cette combinaison de 3 valeurs numériques entre 0 et 255. 0 est le noir et 255 est le blanc. Voir ci-dessous pour la syntaxe adéquate.
+            
+            **hex code** - En partant du symbole (`#`) suivi d'un code hexadécimal, soit 6 caractère, lettres et chiffres, entre 0-9 et A-F.
+
+            
+            ```
+            /* Voici différentes façons d'écrire la même couleur */
+            p {
+                background: firebrick;
+                background: #B22222;
+                background: rgb(178,34,34);
+            }
+
+            ```
+
+            **Références pour les couleurs:**
+
+            [http://www.colorpicker.com/](http://www.colorpicker.com/)  
+            [http://colours.neilorangepeel.com/](http://colours.neilorangepeel.com/)    
+            [http://www.colourlovers.com/](http://www.colourlovers.com/)  
+            [http://flatuicolors.com/](http://flatuicolors.com/)  
+            [http://color.hailpixel.com/](http://color.hailpixel.com/)  
+            [http://wesandersonpalettes.tumblr.com/](http://wesandersonpalettes.tumblr.com/)
+        </section>
+
+        <section class="slide">
+            <h2>Ajouter un arrière-plan de couleur/ *Background Color*</h2>
+            <p>Utilisez la propriété <code>background</code> pour ajouter des arrières-plans colorés à plusieurs éléments dans vos pages. Nous verrons différentes options et variantes plus tard, mais pour l'instant, essayez de changer les couleurs ci-dessous et voyez ce qui arrive !</p>
+
+            <textarea class="snippet" data-subject="#bg-shorthand">background: lightblue;</textarea>
+            <div id="bg-shorthand">
+                <p>Changeons les couleurs d'arrière-plan</p>
+            </div>
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Inclure le CSS
+
+            Il existe 3 différentes façons d'inclure (aussi appelé *referencing*) du CSS dans une page HTML
+
+            ###Sur une ligne/ (*Inline*)
+            On peut ajouter du CSS directement sur n'importe quel élément HTML grâce à l'**attribut** `style`. 
+
+            ```
+            &lt;p style=&quot;color: blue;&quot;&gt;J'écris du CSS!&lt;/p&gt;
+            ```
+            Cette technique devrait être évitée, mais il est bon de savoir qu'elle existe au cas où en verriez quelque part.
+
+            ###Interne/ (*Internal*)
+            Utilisez les balises `&lt;style&gt;` à l'intérieur de l'élément `&lt;head&gt;`.
+
+            ```    
+            &lt;head&gt;
+                &lt;title&gt;Titre de ma page&lt;/title&gt;
+                &lt;meta charset=&quot;utf-8&quot;&gt;
+                &lt;style&gt;
+                    h1 {
+                     font-size: 16px;
+                    }
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;p&gt;J'écris toujours du CSS !&lt;/p&gt;
+            &lt;/body&gt;
+            ```
+            Favorisez cette technique plutôt que la méthode *inline*, elle est plus efficace puisque si vous avez plusieurs pages à votre site, vous auriez à copier le style de chacun des éléments au fur et à mesure que vous voudriez les réutiliser. Vous auriez à dupliquer du code pour une mauvaise raison.
+
+            ###Externe/ (*External*)
+            Créez un lien vers une feuille de style. Cette méthode est la plus recommandée, car elle permet de réellement séparer votre CSS (style) de votre HTML (contenu). Le lien vers votre feuille de style est inclue (*referenced*) dans le `&lt;head&gt;` de chacune de vos pages où votre style est requis. Ainsi, vous n'aurez besoin que de mettre à jour votre fichier CSS en fonction des nouveaux éléments que vous aurez besoin de styliser.
+
+            Pour inclure votre CSS dans l'élément `&lt;head&gt;`, vous devrez créer une balise `&lt;lien&gt;` avec 2 **attribus** `rel` et `href`. Tout comme lorsqu'on crée un lien normal, le `href` pointe le chemin où est situé le fichier.
+            
+            Même si ce n'est pas obligatoire, les fichiers CSS sont souvent sauvegardés dans un dossier nommé CSS dans un souci d'organisation. Si vous organisez vos dossiers, assurez-vous que vos liens sont créés en conséquence.
+
+            L'attribut `rel` définit le type de fichier.
+            
+            ```
+            &lt;head&gt;
+                &lt;title&gt;Page Title&lt;/title&gt;
+                &lt;meta charset=&quot;utf-8&quot;&gt;
+                &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot;&gt;
+            &lt;/head&gt;
+            ```
+
+            **Indice de pro!**  Raccourci Sublime Text : tapez "link" + touche 'tab'. Ta da!
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice #2: Ajoutez des arrière-plans de couleurs (10mins)
+            
+            1. Dans Sublime, ouvrez **style.css** (il devrait être vide) situé dans **project > css **. Incluez le fichier dans votre document HTML.
+            2. Utilisez `background` avec différentes couleurs pour chaque section de votre page. Utilisez un **sélecteur d'élément** pour l'entête (*header*) et des **sélecteurs de classes** pour les sections. Puisqu'il y a plusieurs balises sections, vous devrez utiliser un sélecteur plus spécifique. Voici quelques idées pour vous aider à avancer:
+            
+                ```
+                header { }  
+                .profile { }  
+                .work-experience { }  
+                .skills { }  
+                .education { }  
+                .contact { }
+                ```
+
+            **Bonus**: Ajoutez des commentaires pour organiser votre CSS et créer des groupes au style pertinent.
+
+            Votre page devrait ressembler à quelque chose comme ça (project/examples/2-bg-colours.html) et votre CSS devrait ressembler à ceci(project/examples/2-bg-colours.css). 
+
+            Tous les fichiers d'exemples sont situés dans **project > examples**.
+        </section>
+
+        <section class="slide">
+            <h2>Styles par défaut: Reset vs Normalize</h2>
+            <p>Vous remarquerez que les couleurs ne s'étendent pas jusqu'aux bords des pages. C'est parce que les navigateurs ont leur propre style de base (*User agent stylesheet*) qui s'ajoute au style que vous créez. Voici un exemple du style de base que Chrome utilise (on peut le voir en utilisant les outils de développeur): </p>
+            <img src="framework/img/workshop/chrome-user-agent.png">
+
+            <p>Un <strong>CSS Reset</strong> est un ensemble de règles CSS qui modifie les styles de base des navigateurs pour qu'ils soient identiques et pratiquement sans style. Tout de cela, dans le but d'éviter des différences - le plus possible - entre l'affichage de votre site sur les différents navigateurs.</p>
+
+            <p><strong>Normalize</strong> est un peu différent, car il normalise les styles plutôt que de les enlever. Une autre option serait de choisir un *reset* et de le personnaliser.</p>
+
+            <p>N'oubliez pas que si vous ajoutez une feuille de style *reset* ou *normalize*, il faut aussi l'inclure devant votre feuille de style personnalisée.</p>
+
+            <p>Ces différentes feuilles de style peuvent être téléchargées sur <a href="http://www.cssreset.com/">cssreset.com</a>, mais pour aujourd'hui cette étape a déjà été complétée pour vous dans le dossier <strong>project > css</strong>. Ajoutons le fichier à notre projet d'aujourd'hui (index.html).</p>
+            
+            <div class="presenter-notes">
+                <p>Add the normalize file and discuss the differences and explain why normalize has to come before custom css.</p>
+            </div>  
+        </section>
+        
+        <section class="slide" data-markdown>
+            ##La cascade
+            
+            Le CSS s'exécute du haut vers le bas (voilà d'où viens la « cascade »), alors soyez prudentes avec l'ordre de vos déclarations. Une déclaration qui vient *après* peut en modifier une autre située au-dessus d'elle.
+
+            Dans cet exemple, quelle couleur sera `&lt;h1&gt;` ?
+
+            ```
+            h1 {
+                color: black;
+            }
+            h1 {
+                color: blue;
+            }
+            ```
+        </section>
+        <section class="slide" data-markdown>
+            ##Héritage et spécificité
+            
+            Une des grandes forces du CSS est qu'un élément enfant peut hériter du style de son élément parent. 
+
+            ```
+            &lt;body&gt;
+                &lt;h1&gt;Mon Site web&lt;/h1&gt;&lt;!-- enfant de body --&gt;
+                &lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;&lt;!-- frère de h1 --&gt;
+            &lt;/body&gt;
+            ```
+            ```
+            body {
+                color: blue;
+                font-family: Helvetica, Arial, sans-serif;
+            }
+            h1 {
+                color: black;
+            }
+            ```
+            Dans l'exemple ci-dessus, les propriétés CSS attribuées au sélecteur body font en sorte que tous ses éléments descendants auront un texte bleu et auront la police Helvetica. 
+            Cependant, quand un sélecteur plus spécifique (comme le h1, dans l'exemple) indique une nouvelle règle, c'est elle qui aura prédominance en fonction de sa spécificité.
+        </section>
+
+        <section class="slide title" data-markdown>
+            #Typographie
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Une police sûre/ (*Web safe fonts*)
+            
+            Les polices de caractères par défaut peuvent être changées grâce à la propriété `font-family`. Cependant, toutes les polices ne sont pas installées sur tous les ordinateurs. Il est donc recommandé d'utiliser des polices qui sont considérées comme sûre (*Web safe*) qui sont plus universellement accessibles par tous les ordinateurs.
+        
+            La bonne pratique est de lister au moins 2 ou 3 options de suggestion dans le cas où l'utilisateur ne possèderait pas la police choisie.
+
+            ```
+            font-family: Helvetica, Arial, sans-serif;
+            ```
+            Voici une référence pratique en matière de *Web safe fonts*: [CSS Font Stack](http://cssfontstack.com/).
+        </section>
+
+        <section class="slide">
+            <h2>Styles de polices & Typographie</h2>
+            <p>Expérimentons avec quelques propriétés CSS pour styliser du texte. Essayez de changer quelques-unes des valeurs ci-dessous</p>
+            <textarea class="snippet" data-subject="#typography-example">line-height: 1.25;
+font-family: Helvetica, Arial, serif;
+font-size: inherit;
+font-weight: normal;
+text-transform: inherit;
+color: #222222;</textarea>
+            <div id="typography-example" class="example">
+                <p>Un peu de texte pour tester les styles ci-haut. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni repellat sunt quae fugit illum in aut sed, quis nesciunt totam veritatis, dolores alias modi fuga commodi dicta facilis, consequatur temporibus.</p>
+            </div>
+
+            <p>Ressources:<br>
+            <a href="http://www.htmldog.com/guides/css/beginner/text/">Text CSS properties reference</a><br>
+            <a href="http://csstypeset.com/">http://csstypeset.com</a>- CSS generator</p>
+
+            <div class="presenter-notes">
+                <p>Explain what each property does while updating each example in the code editor.</p>
+            </div>
+        </section>
+
+        <section class="slide">
+            
+            <h2>Exercice en classe: Typographie</h2>
+            
+            <p>Ajoutons ensemble un peu de style en ajoutant quelques polices provenant de <a href="http://cssfontstack.com/">cssfontstack.com</a>.</p>
+                
+
+            <p>1. Définissez la principale font-family &amp; line-height en utilisant <code>body</code> comme sélecteur.</p>
+
+            <pre><code>body {
+    font-family: Georgia, Times, "Times New Roman", serif;
+    line-height: 1.5;
+}</code></pre>
+
+            <p>2. Définissez les polices pour h1, h2 et h3</p>
+
+            <pre><code>h1 {
+    font-family: "Brush Script MT", cursive;
+    font-weight: 400;
+    font-size: 80px;
+}
+h2 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 32px;
+}
+h3 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+}</code></pre>
+
+            <!-- 
+            PRESENTER NOTES:
+            Reference 3-typography 
+            -->
+            <div class="presenter-notes">
+                <ul>
+                    <li>Add main font family &amp; line-height to body - explain inheritance</li>
+                    <li>put h2, h3 styles into separate blocks to show how to combine selectors to demonstrate refactoring in the next slide. Use this to also explain specificity. Tell learners they have the option to type along or just watch to keep from slowing down the demo. They can catch up in the exercise work session since the final code will be posted in the next couple slides.</li>
+                </ul>
+            </div>
+        </section> 
+
+        <section class="slide" data-markdown>
+            ##Refactor! (Réusinage du code)
+    
+            Qu'est-ce que le *refactoring* (réusinage du code, en bon français)? C'est le procédé de restructurer du code existant pour le rendre plus efficace. Lorsque le code est proprement écrit et organisé il roule non seulement plus vite, il diminue les changes de bogues à travers les navigateurs et il rend aussi la maintenance plus facile. C'est facile de le remettre à plus tard, mais il vaut mieux le faire au fur et à mesure.
+
+            Si vous déclarer le même code plus d'une fois, appliquer le style à un élément parent, ainsi les éléments enfant en hériteront. Vous pouvez aussi combiner des sélecteurs pour appliquer le même style à plusieurs sélecteurs en même temps. Soyez certaines de séparer les sélecteurs avec une virgule.
+
+            ```
+            h1, h2 {
+                /* le style codé ici s'appliquera aux 2 entêtes. */
+            }
+            ```
+        </section>
+        <section class="slide" data-markdown>
+            ##Exercice en classe: Typographie (suite)
+
+            L'exemple précédent peut être réusiné de différentes façons:
+            
+            ```
+            h1, h2, h3 {
+                font-weight: 400;
+            }
+            h2, h3 {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                text-transform: uppercase;
+            }
+            h1 {
+                font-family: "Brush Script MT", cursive;
+                font-size: 80px;
+            }
+            h2 {
+                font-size: 32px;
+            }
+            ```
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Les Polices We (*Web fonts*)
+
+            Pour avoir plus d'options que les *web fonts* traditionnelles, il existe des services comme [Google Fonts](http://www.google.com/fonts/) et [Font Squirrel](http://www.fontsquirrel.com/) pour faciliter l'accès à une grande variété de polices qui peuvent être utilisées sans avoir à se soucier de leur installation.
+
+            Un service comme **Font Squirrel** vous demandera de télécharger la police et d'ajouter ces fichiers à votre projet. Le site fournis un [générateur](http://www.fontsquirrel.com/tools/webfont-generator) pour créer différent fichier de police en fonction du support requis par chacun des navigateurs, il inclut aussi un fichier de démo et des instructions d'utilisation. Pratique !
+        
+            **Google Fonts** vous permet de créer un lien direct avec leur feuille de style, sans fichier à télécharger. Pour utiliser ces polices:
+             
+            * Sélectionnez la police que vous voulez utiliser et cliquez sur **Add to Collection**
+            * Vous pouvez les consulter pour mieux les étudier, puis quand vous êtes certaines cliquez *Use* !
+            * Sélectionnez les graisses (*font weights*). Le plus vous en choisissez, plus votre page prendra du temps à charger.
+            * Les caractères par défaut devraient contenir ce dont vous aurez besoin. Ne choisissez un option que si vous devez supporter un autre langage.
+            * Prennez le `&lt;lien&gt;` et ajoutez-le au `&lt;head&gt;` de votre page.
+            * Utilisez votre nouvelle police en utilisant la propriété `font-family` comme présentée dans l'exemple sur la *Google Fonts page*.
+
+            C'est tout !
+        </section>
+
+        <section class="slide">
+            <h2>Exercice #3: Typographie (10mins)</h2>
+
+            <ol>
+                <li>Trouvez et ajouter 2-3 *font-families* sur <a href="http://www.google.com/fonts/">Google Fonts</a></li>
+                <li>Choisissez les polices &amp; typographies qui vous plaisent ! </li>
+            </ol>
+            
+            <p><a href="http://www.htmldog.com/guides/css/beginner/text/">Référence sur les propriétés des éléments de texte en CSS</a><br>
+            <a href="http://csstypeset.com/">http://csstypeset.com</a> - Générateur de CSS</p>
+
+            <p>Besoi d'aide pour choisir une police ? Le projet en exemple utilise (sans-serif), Merriweather (serif), Pacifico (cursive).</p>
+
+            <p>Votre page devrait ressembler à ceci: <a href="project/examples/3-typography.html">Exemple 3</a>.</p>
+
+            <div class="presenter-notes">
+                <p>Tell learners to take 5 mins to pick fonts. If they can't decide, just use the suggestions provided. Picking fonts is often a long process and this will keep from slowing down the day.</p>
+            </div>
+        </section>
+
+        <section class="slide title" data-markdown>
+            #Le modèle de la boîte 
+            (*The Box Model*)
+        </section>
+        
+        <section class="slide" data-markdown>
+            ##Qu'est-ce que le *Box model* ?
+
+            Le navigateur voit chaque élément HTML comme une boîte rectangulaire. Le modèle de la boîte CSS décrit la façon dont fonctionnent les styles CSS de taille et d'espacement. Comprendre le modèle de la boite est fondamental pour comprendre comment positionner des éléments en CSS pour recréer la  structure que vous désirez. C'est une des parties plus complexes du CSS, ne vous en faites pas !
+           
+            Le CSS utilise 5 propriétés pour déterminer la taille et l'espacement des boîtes.
+
+
+            * `margin` - ajouter/enlever de l'espace *en dehors* de l'élément
+            * `padding` - ajouter/enlever de l'espace *à l'intérieur* de l'élément
+            * `border` - ajoute une bordure *en dehors* de l'élément
+            * `width` - peut être défini à une certaine taille 
+            * `height` - peut être défini à une certaine taille 
+        </section>
+
+        <section class="slide">
+            <h2>*Padding* et *Margin* (rembourrage et marges)</h2>
+
+            <p>Le <code>padding</code> et les <code>margin</code> peuvent êtres déclarées en utilisant 1 ou 4 nombres. Les valeurs peuvent en utilisant différentes unités de mesure, mais les pixels et les pourcentages sont les plus communs. Définir la valeur à 0 va <strong>enlever</strong> tout espace mis par défault sur l'élément HTML. Toute valeur positive va <strong>ajouter</strong> de l'espace.</p>
+
+            <ul>
+                <li>4 valeurs signifient haut, droit, bas, gauche</li>
+                <li>3 valeurs signifient haut, droit & gauche, bas</li>
+                <li>2 valeurs signifient haut & bas, droite & gauche</li>
+                <li>1 valeur signifie le même nombre d'espaces de chaque côté.</li>
+            </ul>
+            
+            <p>Changez quelques valeurs pour voir la différence entre les marges et le *padding*. Essayez avec 1 à 4 valeurs différentes. Aussi, essayez d'inspecter l'élément avec votre outil de développement dans Chrome.</p>
+
+            <textarea class="snippet" data-subject="#padding">background: lightblue; 
+padding: 0 0 0 0;
+margin: 0 0 0 0;</textarea>
+            <p id="padding">padding and margin test</p>
+        </section>
+        <section class="slide" data-markdown>
+            ##*Padding* et *Margin* (suite)
+            La diapo précédente utilise la méthode la plus concise de déclarer du *padding* ou des *margins*. Vous pouvez aussi déclarer ces propriétés en parlant d'un côté en particulier.
+
+            ```
+            padding-top: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            ```
+            ```
+            margin-top: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            margin-left: 10px;
+            ```
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Les bordures (*Border*)
+            
+            La propriété *border* se situe entre les *margins* et le *padding* et crée une ligne autour de l'élément. Sa syntaxe lui permet aussi de se déclarer de différentes façons.
+            
+            ```
+            /* Version longue */
+            border-width: 2px;
+            border-style: solid;
+            border-color: red;
+
+            /* Version courte */
+            border: 2px solid red;
+            ```
+            Comme pour *padding* et *margin*, un côté à la fois peut être spécifié.
+            
+            ```
+            /* Version longue */
+            border-top-width: 2px;
+            border-top-style: solid;
+            border-top-color: red;
+
+            /* Version courte */
+            border-top: 2px solid red;
+            ```
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Révision sur le *Box Model*
+
+            Jetons un oeil au schéma pour visualiser comment les toutes ces différentes propriétés peuvent influencer la taille d'un élément.
+
+            ![box model](framework/img/workshop/box-model.gif)
+
+            L'élément était à l'origine d'une largeur et d'une hauteur de **400 x 100**. Après avoir inclus le *padding*, la *border* et les *margins*, la taille de l'élément est passé à  **452 x 152**!
+            
+            La taille de *margin* ne s'additionne pas à la taille réelle de l'élément, mais elle devrait être considérée comme en tel tout de même, car elle ajoute de l'espace autour de ce dernier.
+
+        </section>
+            
+        <section class="slide centered" data-markdown>
+            ##Ishhhh.... :S
+            ![](framework/img/workshop/cant-even.gif)
+        </section>
+
+        <section class="slide" data-markdown>
+            ##La solution au troubles du *Box Model*!
+            
+            Heureusement, il y a une solution.     
+            Luckily, there’s a fix for this. Utilisez [box-sizing: border-box](http://www.paulirish.com/2012/box-sizing-border-box-ftw/) !  
+
+            Nous vous recommandons d'ajouter cette déclaration à tous vos projets !
+
+            ```
+            /* Appliquez-la à tous les éléments. */
+            html {
+                box-sizing: border-box;
+            }
+            *, *:before, *:after {
+                box-sizing: inherit;
+            }
+            ```
+            ![box model diagram](framework/img/workshop/box-model-fix.gif)
+        </section>
+
+        <section class="slide">
+            <h2>Un peu plus sur les *margins*</h2>
+
+            <p><code>margin</code> accepte aussi les valeurs négatives, mais pas le *padding*. Lorsque vous utilisez des valeurs négatives, l'élément sorT de son alignement naturel et peut avoir un impact sur les éléments qui l'entoure.</p>
+
+            <textarea class="snippet" data-subject="#neg-margin">background-color: lightblue;
+width: 100px;
+padding: 20px;
+margin: 0px; /* change to negative value */</textarea>
+            <div id="neg-margin">box</div>
+
+            <p>Référence sur les marges négatives: <a href="http://www.smashingmagazine.com/2009/07/27/the-definitive-guide-to-using-negative-margins/">*The Definitive Guide to Using Negative Margins*</a></p>
+        </section> 
+
+        <section class="slide">
+            <h2>Aligner au centre grâce aux marges</h2>
+            <p>La propriété *margin* peut aussi être utilisée pour centrer horizontalement un élément de type block. (Nous reviendrons sur les types "block"). D'abord, déclarez *margin*, puis définissez les valeurs de gauche &amp; et de droite right à <code>auto</code> ce qui va centrer votre élément. Le <code>0</code>  correspond aux marges du haut et du bas.</p>
+
+            <textarea class="snippet" data-subject="#margin-auto">background-color: lightblue;
+height: 100px;
+width: 600px;
+margin: 0 auto;</textarea>
+            <div id="margin-auto">box</div>
+
+        </section>
+
+        <section class="slide">
+            <h2>Exercice en classe</h2>
+            <ol>
+                <li>Ajoutez la solution au *box model* à notre fichier CSS. <a href="index-fr.html#slide37">Rappel*</a></li>
+                <li>Retournez à votre projet et ajoutez <code>padding:1px</code> à la section <code>header</code> pour observer son comportement. Ouvrez l'inspecteur (outils de développement) dans Chrome et inspectez l'élément.</li>
+                <li>Le conteneur est trop large ! Utilisons <code>margin: 0 auto;</code> pour le centrer. Essayez ensuite d'ajouter du style à la section <code>.profile</code>, dans votre fichier CSS.</li>
+            </ol>
+
+<pre class="prettyprint"><code>.profile {
+    width: 1000px;
+    margin: 0 auto;
+}</code></pre>
+
+            <p>Votre page devrait resembler à ceci:</p>
+            <p><img src="framework/img/workshop/margin-auto.png" alt="" title=""></p>
+            <div class="presenter-notes">
+                <p>This exercise is to demonstrate why we need to add a wrapper around the content which is covered in the next step.</p>
+            </div>
+        </section>
+
+        <section class="slide" data-markdown>
+##Continuons l'exercice
+
+Le contenu est centré, mais l'arrière-plan (*background colour*) est restreint par la taille et il ne s'étire plus sur toute la page. Pour arranger ça, nous devrons créer un conteneur qui servira à permettre l'alignement du contenu par l'ajout d'une nouvelle `div` avec la classe `content-wrap` pour contenir ce qui a trait au profil.
+
+```
+&lt;section class="profile"&gt;
+    &lt;div class="content-wrap"&gt;&lt;!-- new content wrap div --&gt;
+ƒ
+        &lt;img src="images/profile-generic.jpg" alt="Your Name"&gt;
+        &lt;div class="summary"&gt;
+            ...
+        &lt;/div&gt;
+
+    &lt;/div&gt;&lt;!-- close contact wrap div --&gt;
+&lt;/section&gt;
+    ```
+Puis appliquez les styles à `.content-wrap` au lieu de `.profile`. Ajoutez un peu de padding aussi.
+
+```
+.content-wrap {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 60px 0;
+}
+```
+        </section>
+
+         <section class="slide" data-markdown>
+            ##Exercice #4: Les contenants! (15mins)
+
+            Ajoutez la classe `.content-wrap` à chaque section * sauf * le `header`. Nous expliquerons pourquoi l'en-tête n'en a pas besoin très bientôt.
+
+            Tout d'abord, pour faciliter l'ajout de notre classe, revenons sur comment minimiser des blocs de code ainsi que sur comment changer la tabulation de plusieurs lignes en même temps dans Sublime.
+
+            Votre page devrait ressembler à quelque chose comme ça: [exemple 4](project/examples/4a-content-wrap.html).
+
+        </section>
+
+        <section class="slide">
+            <h2>width &amp; max-width, px vs %</h2>
+            <p>Le contenu est maintenant beau et centré, mais que ce passe-t-il lorsque la fenêtre du navigateur est plus petite que la largeur établie? Regardons la différence entre les propriétés <code>max-width</code> et <code>width</code> ainsi que l'utilisation de pourcentages et de pixels.</p>
+
+            <p>Réduisez la taille de la fenêtre et voyez comment la boîte répond. Remplacez ensuite la largeur par un pourcentage inférieur à 100 % et essayez à nouveau.</p>
+
+            <textarea class="snippet" data-subject="#widths">border: 1px solid black;
+margin: 0 auto;
+width: 100%;
+max-width: 1000px;</textarea>
+            <div id="widths">
+                <p>Lorem ipsum dolor sit amet.</p>
+            </div>
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice pratique
+
+            Modifions le style de `.content-wrap` pour inclure `max-width` et modifions `width`.
+
+            ```
+            .content-wrap {
+                max-width: 1000px;
+                width: 90%;
+                margin: 0 auto;
+                padding: 60px 0;
+            }
+            ```
+
+            Votre page ressemblera maintenant à [celle-ci](project/examples/4b-content-wrap.html). Diminuez la taille de la fenêtre pour tester les modifications.
+
+            Nous avons créé un style réutilisable qui nous aidera à garder notre CSS propre. Nous pourrons donc appliquer cette classe à chaque endroit où ce style sera nécessaire.
+        </section>
+
+        <section class="slide" data-markdown>
+            ## Les dangers des "div-it aiguë"
+
+            N'attrapez pas la "div-it aiguë". Utilisez les `&lt;div&gt;` pour *grouper* des élements qui seront stylisés ensemble en une seule section. Si vous devez styliser un seul élément, comme un `&lt;h1&gt;`, vous n'avez qu'à ajouter directement votre style à cet élément. Votre navigateur voit chaque élément comme un "boîte" donc il n'est pas nécessaire de mettre une boîte autour d'une boîte!
+
+            La règle d'or est d'ajouter seulement ce dont vous avez besoin. C'est beaucoup plus facile d'ajouter que d'enlever des éléments de style.
+
+            ```xml
+            &lt;div class=&quot;title&quot;&gt;
+                &lt;h1&gt;Heading&lt;/h1&gt;
+            &lt;/div&gt;
+            ```
+
+            peut devenir seulement
+
+            ```xml
+            &lt;h1 class=&quot;title&quot;&gt;Heading&lt;/h1&gt;
+            ```
+        </section>
+        <section class="slide centered" data-markdown>
+            ##Éviter le gonflement de code
+
+            ![](framework/img/workshop/bloat.jpg)
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Modifier le style de header & heading
+
+            Dans le cas de la section `header`, nous pouvons appliquer `text-align: center` plutôt qu'ajouter la div `.content-wrap`. Étant donné que le contenu est court, nous n'avons pas à nous inquiéter de le contenir, nous évitons donc la "div-it aiguë". Aussi, ajustez le `padding` pour ajouter plus d'espace dans notre en-tête. Le code final pour l'en-tête devrait ressembler à ceci:
+
+            ```
+            header {
+                background: #2c3e50;
+                text-align: center;
+                padding: 150px 0;
+            }
+            ```
+
+            Pendant que nous y sommes, enlevons toutes les `margins` par défaut pour avoir plus de contrôle sur l'espace occupé par nos `headings`. Ajoutez `margin: 0` au bloc de code existant pour les `headings`.
+            ```
+            h1, h2, h3 {
+                font-weight: 400;
+                margin: 0;
+            }
+            ```
+
+            Votre en-tête devrait ressembler à l'[exemple 5](project/examples/5-header.html):
+
+            ![header](framework/img/workshop/header.jpg)
+        </section>
+
+        <section class="slide">
+            <h2>C'est l'heure du lunch</h2>
+
+            <p>Vous avez besoin d'un peu de temps pour regarder votre travail?</p>
+            <p>Allez voir dans le dossier d'<strong>exemples</strong>. Nous sommes rendus à <strong>5-header.html</strong> &amp; <strong>5-header.css</strong>.</p>
+            <p>Aussi, vous pouvez vous préparer pour le prochain exercice en trouvant deux images à utiliser comme arrière-plan pour votre page ou simplement en choisir dans le dossier images inclus dans <strong>projet > images</strong>. Voici le lien vers le <a href="project/final.html">projet final pour référence</a>.</p>
+            <p>Quelques ressources gratuites pour des images</p>
+            <ul>
+                <li><a href="http://superfamous.com/">http://superfamous.com/</a></li>
+                <li><a href="http://www.gratisography.com/">http://www.gratisography.com/</a></li>
+                <li><a href="http://littlevisuals.co/">http://littlevisuals.co/</a>  </li>
+                <li><a href="http://nos.twnsnd.co/">http://nos.twnsnd.co/</a></li>
+                <li><a href="http://unsplash.com/">http://unsplash.com/</a> </li>
+            </ul>
+            <div class="presenter-notes">
+                <p>Cet exercice permettra aux étudiants moins avancés de rattraper le groupe et donnera aussi l'opportunité aux étudiants de personnaliser leur site sans prendre du temps sur le temps de classe. L'après-midi couvre beaucoup de matériel et ceci permettra d'optimiser le temps. Le lunch devrait être autour de 12:15 - 12:30pm. Un lunch de 45min est recommandé.</p>
+            </div>
+        </section>
+
+        <section class="slide title" data-markdown>
+            #Image d'arrière-plan
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice pratique: Les images d'arrière-plan
+
+            Jusqu'à maintenant, nous avons utilisé `background` pour les couleurs, mais la même propriété peut être utilisée pour régler une image d'arrière-plan.
+
+            ```
+            background-image: url(path/to/file.jpg); /* longhand */
+            background: url(path/to/file.jpg);/* shorthand */
+            ```
+            Étant donné que votre fichier CSS est à l'*intérieur* d'un dossier, utilisez `../` pour *sortir* du dossier pour accéder au fichier d'images.
+
+            Maintenant, ajoutons une image d'arrière-plan au `body` de notre page. Vous pouvez choisir une image parmi celles situées dans le dossier **projet > images** ou ajouter une image de votre choix.
+
+            ```
+            background: url(../images/background-1.jpg);
+            ```
+            Voyez comment l'image se répète? Réglons cela tout de suite.
+        </section>
+        <section class="slide" data-markdown>
+            ##Exercice pratique: Les images d'arrière-plan (suite)
+
+            Pour empêcher l'image de se répéter, utilisez `background-repeat` ou utilisez la version courte en ajoutant votre valeur à la propriété `background`.
+
+            ```
+            /* version courte */
+            background: url(../images/background-1.jpg) no-repeat;
+
+            /* version longue */
+            background-image: url(../images/background-1.jpg);
+            background-repeat: no-repeat;
+            ```
+
+            Maintenant, l'image ne prend pas toute la page mais, avant de modifier ceci, essayons d'ajouter un autre style. Ajoutez "fixed" à la version courte de la propriété `background`. Allez voir votre page et faites-la défiler. Que ce passe-t-il avec l'image?
+
+            ```
+            /* version courte */
+            background: url(../images/background-1.jpg) no-repeat fixed;
+
+            /* version longue */
+            background-image: url(../images/background-1.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            ```
+
+        </section>
+        <section class="slide" data-markdown>
+            ##Taille de l'arrière-plan
+
+            CSS3 a introduit la propriété `background-size` qui nous permet non seulement de changer la taille de l'image mais aussi de rendre l'image d'arrière-plan fluide et flexible. La syntaxe est:
+
+            ```
+            background-size: width height;
+            ```
+            La valeur par défaut pour la `width` et le `height` est `auto` et garde les dimensions originales de l'image. Si seulement une valeur est définie, la valeur sera considérée comme étant celle de la `width`. Le `height` sera réglé à `auto` et l'image maintiendra ces proportions initiales.
+
+            Il y a plusieurs façons de définir les dimensions en utilisant px, pourcentages, mots-clés, etc.
+
+            `background-size` est la version longue de la propriété. Pour l'inclure dans la version courte `background`, il *doit* être inclus après `background-position`, séparé par le caractère `/`.
+
+            ```
+            header {
+                background-image: url(../images/background-1.jpg);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: 50%;
+                background-size: 100%;
+            }
+            ```
+            ```
+            header {
+                background: url(../images/background-1.jpg) no-repeat fixed 50% / 100%;
+            }
+            ```
+            Si aucune valeur pour `background-position` n'est donnée, `background-size` ne fonctionnera pas dans la version courte. Donc, dans ce cas, il peut être plus facile de ne pas faire d'erreur en utilisant la version longue de la propriété.
+
+            ```
+            header {
+                background: url(../images/background-1.jpg) no-repeat fixed 50%;
+                background-size: 100%;
+            }
+            ```
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice pratique: Background-size
+
+            Tout semble parfait... jusqu'à ce que vous diminuez la taille de l'écran. C'est à ce moment qu'utiliser le mot-clé `cover` fonctionnera mieux.
+
+            `cover` ajuste l'image pour qu'elle remplisse le contenant en entier mais, si elle a des proportions différentes que celles de l'écran, l'image sera rognée.
+
+            Changeons le `background-size` à `cover`. Votre code devrait ressembler à ceci:
+
+            ```
+            background: url(../images/background-2.jpg) no-repeat fixed 50%;
+            background-size: cover;
+            ```
+            Et votre page devrait ressembler à l'[exemple 6](project/examples/6-background.html).
+
+            **Ressource additionnelle**: https://developer.mozilla.org/en/docs/Web/CSS/background
+        </section>
+
+        <section class="slide" data-markdown>
+            ##La propriété float
+
+            N'oubliez pas, les éléments HTML bloc comme `&lt;p>`, `&lt;div>` and `&lt;section>` commencent automatiquement sur une nouvelle ligne et se positionnent un par-dessus l'autre. Pour que deux blocs s'alignent un à côté de l'autre, `float` peut être utilisé.
+
+            Les floats CSS peuvent flotter à gauche ou à droite.
+
+            **Cependant**, nous brisons le *flux d'empilement normal* en mettant un élément en `float`. Tous les éléments *suivants* celui que nous avons mis en `float` essaieront de se déplacer à côté de lui ou n'apparaîtront pas comme prévu, car nous avons perturbé le flux d'empilement normal. Le contenant parent s'effondrera aussi.
+
+            **Aussi**, si aucune largeur n'est définie, l'élément flottera, mais la largeur sera automatiquement la largeur de son contenu.
+        </section>
+        <section class="slide centered">
+            <img src="framework/img/workshop/shittier.gif">
+            <h2 class="delayed">C'est une blague! On peut régler tout ça.</h2>
+        </section>
+
+        <section class="slide">
+            <h2>Float, Clear and Clearfix</h2>
+            <p>D'abord, nous devons le briser, et ensuite le réparer. Un des concepts CSS qui portent le plus à confusion est à quel moment utiliser <code>clear:both</code> et la classe <code>.clearfix</code>. Règle d'or: si un élément suit l'élément mis en `float`, appliquez <code>clear: both</code> à cet élément. Si tous les éléments doivent être mis en `float`, appliquez la classe <code>.clearfix</code> à l'élément <em>parent</em>.</p>
+
+            <iframe width="100%" height="360" src="http://jsfiddle.net/ttt5ebhr/3/embedded/html,css/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+            <p>Ajoutons le snippet clearfix à notre fichier CSS afin de l'utiliser plus tard.</p>
+            <p>Vous voulez en savoir plus à propos de l'astuce du clearfix ainsi qu'à propos de la gestion des `floats`? Voilà :<br>
+            <a href="http://css-tricks.com/snippets/css/clear-fix/">http://css-tricks.com/snippets/css/clear-fix/</a><br>
+            <a href="http://www.sitepoint.com/clearing-floats-overview-different-clearfix-methods/">http://www.sitepoint.com/clearing-floats-overview-different-clearfix-methods/</a>
+            </p>
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Les sélecteurs enfant
+
+            **Sélecteur enfant** - Correspond à n'importe quel élément *descendant* de l'élément déclaré avant lui.
+
+            ```css
+            p a {
+                /* cible seulement les balises a imbriquées dans une balise p */
+            }
+            .classname a {
+                /* cible seulement les balises a imbriquées dans n'importe quel élément auquel nous avons attribué la classe classname */
+            }
+            ```
+            **Truc de pro:** Comme dans le film Inception, n'allez jamais à plus de trois niveaux de profondeur!
+
+            ```
+            nav ul li a span {
+                /* NOOOOOOOOOOO */
+            }
+            ```
+            N'hésitez pas à sauter un niveau, mais soyez conscients des règles de précision. Par exemple, `nav ul li a` l'emportera sur `nav a`. Il est généralement plus facile de commencer avec des sélecteurs moins précis et de les rendre plus précis si nécessaire plutôt que de commencer avec des sélecteurs très spécifiques et d'ajouter des sélecteurs supplémentaires pour essayer d'écraser leur style.
+        </section>
+
+        <section class="slide" data-markdown>
+##Exercice pratique: Floats
+
+1. Ajoutez un `float` à votre image de profil pour que le texte puisse l'entourer. Qu'arrive-t-il à l'élément parent quand un élément enfant est mis en `float`?
+
+    ```
+    .profile img {
+        float: left;
+    }
+    ```
+
+2. Ajoutez la classe `clearfix` à l'élément parent.
+
+3. Attribuez une grandeur relative à l'image et ajoutez une marge pour créer un espace entre l'image et le texte.
+
+    ```
+    .profile img {
+        float: left;
+        width: 27%;
+        margin-right: 3%;
+    }
+    ```
+
+4. Si le texte est plus long que l'image, il l'entourera. Attribuez une largeur au sommaire du profil et mettez-le aussi en `float`. (Si vous voulez que le texte entoure l'image de profil, passez cette étape.)
+    ```
+    .summary {
+        width: 70%;
+        float: right;
+    }
+    ```
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice #7: Ajouter plus de floats et de bordure (20mins)
+
+            Ajoutez des `floats` à la section **Expérience de travail**. Voici un lien vers le [projet final](project/final.html) que vous pouvez utiliser comme référence et pour obtenir quelques indices pour vous aider à démarrer:
+
+            Dans le HTML, l'élément `.details` contient l'info qui doit être présenté à gauche et l'élément `.description` contient le contenu qui doit être affiché à droite. Les `floats` peuvent être utilisés pour accomplir ceci. N'oubliez pas, il est important d'attribuer une largeur aux éléments que nous mettons en `float`.
+
+            Que ce passe-t-il quand les éléments sont mis en `float`? L'**élément parent** s'effondre donc assurez-vous de *fixer* ceci aussi!
+
+            ```
+            &lt;div class=&quot;item&quot;&gt;
+                &lt;div class=&quot;details&quot;&gt;
+                    Nom de la compagnie, date, etc
+                &lt;/div&gt;
+                &lt;div class=&quot;description&quot;&gt;
+                    Description de l'emploi
+                &lt;/div&gt;
+            &lt;/div&gt;&lt;!-- close .item --&gt;
+            ```
+            **Bonus:** Si vous avez du temps, suivez ces instructions pour ajouter une bordure ou changez quelques styles de polices d'écriture!
+
+            * Chaque item d'Expérience de travail est contenu dans un élément qui possède la classe `.item`. Créer un nouveau bloc de déclaration pour `.item` et ajoutez-lui la propriété `border-bottom`. La syntaxe est la suivante: `border-bottom: grosseur style couleur;`
+
+            ```
+            .item {
+                border-bottom: 1px solid #ccc;
+            }
+            ```
+            **Bonus extra:** Pour s'assurer que tous les items **Expérience de travail** ont une bordure *sauf* le dernier item, utilisez un **[sélecteur de pseudo-classe](http://www.w3.org/wiki/CSS/Selectors/pseudo-classes/:last-child)**, `:last-child`. Notez bien la syntaxe suivante:
+
+            ```
+            .item:last-child {
+                border-bottom: none;
+            }
+            ```
+
+            Votre page devrait ressembler à ceci: [Exemple 7](project/examples/7-floats.html).
+        </section>
+
+
+        <section class="slide" data-markdown>
+            ##Plus de façon de styliser l'arrière-plan
+
+            C'est le temps de se débarrasser des couleurs d'arrière-plan test et de mettre des styles plus agréables à regarder.
+
+            Pour la section **Profil**, ajoutez une opacité à la couleur d'arrière-plan. Étant donné que le HTML pour cette section est imbriqué dans la balise `body`, en ajoutant une opacité à la section Profil nous pourrons voir l'image d'arrière-plan du `body` derrière elle.
+
+            Utilisez la propriété `background` mais avec une valeur en `RGBa`. Le `a` représente la transparence alpha. (Il y a aussi une propriété `opacity` mais celle-ci changerait aussi l'opacité du texte donc nous allons plutôt utiliser `background`.)
+
+            ```
+            .profile {
+                background: rgba(0,0,0,0.8);
+            }
+            ```
+        </section>
+
+        <section class="slide">
+            <h2>Exercice #8: Arrière-plans, couleurs et bordures (20mins)</h2>
+
+            <ol>
+                <li>Modifiez les sections <strong>Expérience de travail</strong> et<strong>Éducation</strong> avec la même couleur d'arrière-plan. L'exemple de projet utilise un gris très pâle (#fefefc).</li>
+                <li>Modifiez la couleur de la police d'écriture des sections Profil, Compétences &amp; Contact à blanc ou #ffffff. (Essayez de combiner les sélecteurs pour les styles partagés.)</li>
+                <li>Ajoutez une image d'arrière-plan à la section <strong>Compétences</strong>. Ne vous inquiétez pas à propos de l'effet de superposition pour l'instant, ajoutez simplement l'image.</li>
+                <li>Ajoutez un soulignement aux titres <code>&amp;lt;h2&gt;</code>, de couleur #cccccc ou d'une couleur de votre choix </li>
+                <li>Modifiez la couleur d'arrière-plan de la section Contact. Utilisez #111111 ou une couleur de votre choix.</li>
+                <li>Choississez une couleur accent et appliquez-la à tous vos liens (élément <code>a</code>).</li>
+            </ol>
+
+            <p><strong>Inspiration de couleurs:</strong> <br>
+            <a href="http://colours.neilorangepeel.com/">http://colours.neilorangepeel.com/</a> <br>
+            <a href="http://flatuicolors.com/">http://flatuicolors.com/</a>  </p>
+
+            <p>Si vous restez bloqué, demandez à un mentor! Ne vous inquiétez pas si vous n'avez pas fini, nous passerons à travers tout ça ensemble en classe.</p>
+
+            <p>Votre page devrait ressembler à celle-ci: <a href="project/examples/8-bg.html">Exemple 8</a>.</p>
+
+            <div class="presenter-notes">
+                <p> Quand le temps attribué à l'exercice est terminé, ayez une discussion en classe. Passez à travers les étapes avec la classe et demandez aux gens s'ils veulent partager quelconques questions, commentaires ou trucs.</p>
+            </div>
+        </section>
+
+        <section class="slide title" data-markdown>
+            #CSS3!
+        </section>
+
+        <section class="slide" data-markdown>
+            ## Propriété CSS3: border-radius
+
+            L'introduction de CSS3 a apporté des nouvelles façons de faire ce qui était précédemment seulement possible de faire en Flash, JavaScript ou à l'aide de hack compliqué.
+
+            Commençons avec `border-radius`. Il était une fois, des coins ronds qui devaient être découpés depuis des images avec des fonds transparents et bla bla bla Zzzzz... Maintenant, nous pouvons le faire avec seulement une ligne de CSS! Ajoutez cette propriété à l'image de profil. Un pourcentage ou une valeur en pixels peuvent être utilisés. Le plus grand le nombre, le plus rond les coins seront. Pour obtenir un cercle parfait, réglez le `border-radius` à 50% et assurez-vous que l'image originale est un carré (sinon elle deviendra ovale).
+
+            ```
+            .profile img {
+                border-radius: 50%;
+            }
+            ```
+
+            Maintenant, ajoutons une bordure et du `padding`. Souvenez-vous, le `padding` ajoute de l'espace à l'*intérieur* d'un élément.
+            ```
+            .profile img {
+                border-radius: 50%;
+                border: 1px solid #ddd;
+                padding: 4px;
+            }
+            ```
+        </section>
+        <section class="slide" data-markdown>
+            ##CSS3 Les préfixes vendeurs
+
+            Dans certains cas, une propriété CSS standard peut exiger l'ajout d'un préfixe spécifique à un navigateur. Par exemple, voici différents préfixes vendeurs pour différents navigateurs :
+
+            * Chrome & Safari: `-webkit-`
+            * Firefox: `-moz- `
+            * Internet Explorer: `-ms-`
+
+            Toutes les propriétés n'exigent pas l'utilisation des préfixes et, à chaque mise à jour des navigateurs, de plus en plus de propriétés sont supportées sans l'utilisation de ces préfixes. Voici quelques ressources qui pourraient vous être utiles:
+
+            * [caniuse.com](http://caniuse.com)
+            * [css3please.com](http://css3please.com/)
+            * [-prefix-free](http://leaverou.github.io/prefixfree/) - note, doesn't work **locally** in Chrome.
+            * [css-tricks.com/how-to-deal-with-vendor-prefixes](http://css-tricks.com/how-to-deal-with-vendor-prefixes/)
+        </section>
+
+        <section class="slide">
+            <h2>Modification du titre du Profil</h2>
+
+            <p>Modifions la balise <code>&lt;h2&gt;</code> de la section Profil et donnons-lui un style différent des autres titres. Premièrement, nous allons outrepasser la bordure du dessous. Nous devons utiliser un sélecteur spécifique à la section Profil. Aussi, ajoutons une couleur d'arrière-plan. Essayez d'utiliser votre couleur accent.</p>
+<pre><code>.profile h2 {
+    border: none;
+    background: #2980b9;
+}</code></pre>
+
+            <p>Les `headings` sont des <em>éléments de type bloc</em> donc, par défaut, ils voudront prendre 100% de la largeur de leur contenant. Nous pourriez lui attribuer une valeur de largeur mais qu'arrivera-t-il si nous changeons le titre? Nous aurions alors à changer la valeur de la largeur à nouveau. <em>Les éléments de type *inlineI</em> sont aussi large que leur contenu.</p>
+            <p>En CSS, nous pouvons utiliser <code>display: inline-block;</code> pour accéder au comportement du bloc et de l'*inline* et changer comment le h2 est présenté. Ajoutez du padding aussi.</p>
+<pre><code>.profile h2 {
+    border: none;
+    background: #2980b9;
+    display: inline-block;
+    padding: 10px 20px;
+}</code></pre>
+            <p><a href="framework/extras-inline-block.html">Aprennez-en plus à propos des éléments de type bloc et inline et à propos de la propriété display ici.</a></p>
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Le pseudo sélecteur :hover
+
+            Essayons de faire quelques changements à ce qui arrive quand nous plaçons notre curseur sur un élément en utilisant `:hover` [sélecteur pseudo-classe](http://www.w3.org/wiki/CSS/Selectors/pseudo-classes/:hover).
+
+            Les sélecteurs pseudo ont besoin d'être attachés à un élément avec deux points (`:`) *sans* espace. Une utilisation commune pour ce sélecteur est pour les liens. Ajoutons un changement de couleur en *hover*.
+
+            ```
+            a:hover {
+                color: #ffffff;
+            }
+            ```
+        </section>
+        <section class="slide">
+            <h2>La propriété CSS transition</h2>
+
+            <p>La propriété transition peut être utilisée pour changer la durée d'un changement de valeur ce qui rendra le changement moins abrupt. Mettez votre curseur sur le paragraphe pour voir la transition. Expérimentez et changez les valeurs ci-dessous.</p>
+
+<pre><code>transition: [transition-property] [transition-duration] [transition-timing-function] [transition-delay];</code></pre>
+
+            <textarea class="snippet">p {
+    transition: all 0.5s ease;
+    color: black;
+}
+p:hover {
+    background-color: #cccccc;
+    color: white;
+}</textarea>
+            <p>Pour en savoir plus à propos de transition: <a href="http://css-tricks.com/almanac/properties/t/transition/">http://css-tricks.com/almanac/properties/t/transition</a></p>
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice pratique: hover & transition
+
+            Ajoutez la propriété transition à l'effet hover et essayez de mettre votre curseur sur vos liens.
+
+            Votre page devrait ressembler à [exemple 9](project/examples/9-css3.html).
+
+```css
+a {
+    color: #2980b9;
+    transition: all 0.5s ease;
+}
+a:hover {
+    color: #ffffff;
+}
+```
+        </section>
+
+        <section class="slide centered" data-markdown>
+            ##Pause GIF
+            ![](framework/img/workshop/css.gif)
+        </section>
+
+        <section class="slide">
+            <h2>Gradients</h2>
+
+            <p><code>background</code> peut aussi être utilisé pour créer un gradient. Utiliser les gradients CSS plutôt qu'une image améliore la flexibilité et la performance. Les gradients sont généralement une couleur qui se fond dans une autre. Avec le CSS, vous pouvez contrôler la direction du fondu, les couleurs ainsi qu'à quel endroit le changement se produit.</p>
+
+            <p>Les gradients sont réglés à l'aide de la propriété <code>background-image</code>. La version courte <code>background</code> fonctionnera aussi.</p>
+
+            <p>Pour régler les valeurs de couleur de début et de fin, utilisez <code>linear-gradient(color, color)</code>. L'axe par défaut est du haut vers le bas, cependant, il est aussi possible de changer la direction de l'axe. Pour changer la direction de gauche à droite, donnez un paramètre additionnel au début de <code>linear-gradient()</code> en commençant par "to" suivi de la direction. (ex. "to right")</p>
+
+            <pre><code>background-image: linear-gradient(to right, red, blue);</code></pre>
+
+            <p>Dans l'exemple suivant, essayez de régler les couleurs de départ et de fin. Ensuite, essayez de changer la direction.</p>
+
+            <textarea class="snippet">background: linear-gradient();</textarea>
+
+            <p>Apprenez tout à propos des gradients ici: <a href="http://css-tricks.com/css3-gradients/">http://css-tricks.com/css3-gradients/</a></p>
+        </section>
+
+        <section class="slide">
+            <h2>Les gradients et les images d'arrière-plan</h2>
+
+            <p>Dans la section Compétences, le texte est difficile à lire à travers l'image d'arrière-plan. Nous pouvons utiliser les gradients et utiliser plusieurs images d'arrière-plan superposées pour remédier à ce problème.</p>
+
+            <p>Déclarez le gradient en premier pour qu'il se place au-dessus de l'image. Nous voulons aussi voir l'image à travers le gradient donc il faut utiliser une valeur de couleur RGBA pour régler la transparence alpha.</p>
+
+            <textarea class="snippet" data-subject="#bg-image-gradient">height: 300px;
+background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(project/images/background-4.jpg);
+            </textarea>
+            <div id="bg-image-gradient"></div>
+        </section>
+
+        <section class="slide" data-markdown>
+##Exercise #10: Gradient & plus de floats (15 mins)
+
+1. Utilisons l'exemple précédent, ajoutez un effet de gradient à la section **Compétences** pour rendre le texte plus facile à lire sur l'image d'arrière-plan.
+
+2. Dans la section **Compétences**, il y a deux options, l'option `.skills-list` et l'option `.skills-circle`. Mettez de côté l'option *circle* pour l'instant, ajoutez des floats à la classe `.column` pour obtenir **trois** listes alignées côte à côte. Nous aurons besoin de régler `width`, `float` et d'utiliser la classe `clearfix`.
+
+Voici à quoi devrait ressemble votre page: [exemple 10](project/examples/10-skills-section.html).
+
+Voir plus bas pour le code final, mais seulement si vous êtes bloqué!
+
+```
+.skills {
+  background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),url(../images/background-4.jpg) no-repeat fixed;
+  background-size: cover;
+}
+```
+```
+.skills .columns {
+  width: 33.33%;
+  float: left;
+}
+```
+```xml
+&lt;div class=&quot;skills-list clearfix&quot;&gt;
+    &lt;h3&gt;List Option&lt;/h3&gt;
+    &lt;div class=&quot;columns&quot;&gt;&lt;!--float this class! --&gt;
+        &lt;h4&gt;Best at:&lt;/h4&gt;
+        &lt;ul&gt;
+            ...
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    ...
+&lt;/div&gt;
+```
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Le positionnement en CSS
+
+            Parfois, floats et display ne font pas l'affaire.
+
+            La propriété `position` peut être utilisé pour placer les éléments à des endroits spécifique sur une page sans affecter les éléments l'entourant comme `float` le fait. Il y a trois options: `relative`, `absolute` and `fixed`. Les éléments sont tous `static` par défaut.
+
+            `position` est utilisé conjointement avec les propriétés offset: `top`, `right`, `bottom`, and `left`. Celles-ci sont utilisées pour identifier où un élément sera positionné.
+
+            Aujourd'hui, nous utiliseront la position `fixed`. Pour en apprendre plus à propos de position, [allez ici](framework/extras-positioning.html).
+
+        </section>
+
+        <section class="slide">
+            <h2>Position: fixed</h2>
+
+            <p>Quand nous positionnons un élément à <code>fixed</code>, il sera <em>toujours</em> visible dans la fenêtre et restera toujours au même endroit dans la page, même en défilant la page. Essayez d'ajouter une valeur <code>top</code> (ou n'importe quelle propriété offset: <code>right</code>, <code>bottom</code>, <code>left</code>).</p>
+            <pre><code>&lt;div class=&quot;box&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+            <textarea class="snippet" data-subject="#fixed">.box {
+    width: 100px;
+    height: 100px;
+    background: blue;
+    position: fixed;
+    top: ;
+}</textarea>
+
+            <div id="fixed">
+                <div class="box"></div>
+            </div>
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice pratique: Télécharger CV en format PDF
+
+            Certaines personnes pourraient être intéressées à avoir une copie papier de votre CV, donc ajoutons une option pour télécharger une copie. Retournez à votre document HTML et ajoutez un lien vers une copie de votre CV. Dans votre dossier projet, il y a un **resume.pdf** qui peut être utilisé comme exemple ou vous pouvez mettre le vôtre s'il est à portée de main.
+
+            Utilisez une balise *anchor* pour lier votre fichier PDF. Vous pouvez aussi ajouter le nouvel attribut HTML5 `download` pour déclencher le téléchargement tout de suite! Aussi, donnez-lui une classe pour lui appliquer un style unique.
+
+            ```xml
+            &lt;a class="download" href=&quot;resume.pdf&quot; download&gt;Download resume (pdf)&lt;/a>
+            ```
+        </section>
+        <section class="slide">
+            <h2>Exercice pratique: Positionner et styler le lien de téléchargement</h2>
+
+            <p>Utilisez le positionnement `fixed` sur le lien pour le rendre toujours disponible pendant que l'utilisateur fait défiler la page. </p>
+
+            <p>Quelles propriétés &amp; valeures sont nécessaire pour positionner cet élément en haut à droite de la page?</p>
+
+<pre class="delayed"><code>.download {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+</code></pre>
+            <p class="delayed">Pour que ce lien ressemble davantage à un bouton, <a href="framework/extras-download-btn.html">suivez ces instructions</a>.</p>
+            </div>
+            <div class="presenter-notes">
+                <p>Les diapositives pour davantage de style sur le lien de téléchargement a été bougé à la section extras/devoirs car elles ne couvrent aucun nouveau concept. Ça nous donne donc du temps pour introduire les polices d'icônes.<p>
+            </div>
+        </section>
+
+        <section class="slide" data-markdown>
+        ##Icon fonts
+
+        Les polices d'icônes sont une manière facile d'ajouter des images à votre site tout en ayant la flexibilité d'utiliser des propriétés de style CSS pour changer leur grandeur et leur couleur, par exemple. Après tout, ce *sont* des polices d'écriture.
+
+        Il en existe plus d'une mais, aujourd'hui, nous utiliseront Font Awesome:
+        [http://fortawesome.github.io/Font-Awesome/](http://fortawesome.github.io/Font-Awesome/)
+
+        Sous **[Get Started](http://fortawesome.github.io/Font-Awesome/get-started/)**, il y a plusieurs options pour ajouter les fichier de *font*. Si vous utilisez le CDN, n'oubliez pas d'ajouter le "http" pour qu'il fonctionne quand vous utilisez votre page "localement" (sur votre ordinateur).
+
+        Pour l'utiliser, [choisissez une icône](http://fortawesome.github.io/Font-Awesome/icons/) et copiez le code et les classes fournis et c'est tout! Tous les icônes de médias sociaux dans le *footer* du fichier index.html de votre projet sont incluses à l'aide d'une police d'icônes.
+        </section>
+
+        <section class="slide" data-markdown>
+        ##Exercice pratique - Remettre à zéro le style des listes
+
+        Ajoutez un peu de flair à votre liste de compétences en remplaçant la puce (*bullet*) par défaut par une icône.
+
+        Pour enlever la puce par défaut, utilisez la propriété CSS et valeur, `list-style-type: none;`. Le `ul` est le sélecteur étant donné qu'il est utilisé pour créer la liste. Les listes ont aussi un padding par défaut pour créer l'indentation, donc il faut le mettre à zéro en utilisant la valeur 0.
+
+        Étant donné que nous voulons enlever les puces de toutes les éléments de liste de cette section, nous pouvons toutes les cibler en même temps en utilisant un **sélecteur enfant**. Nous pouvons utiliser `.skill`, étant donné que c'est la classe pour la section au complet et `ul` pour cibler toutes les listes.
+
+```css
+.skills ul {
+    list-style-type: none;
+    padding: 0;
+}
+```
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Exercice #11: Ajouter une police d'icônes (15mins)
+
+            Maintenant que nous avons enlevé les puces, ajoutons un crochet. Visitez [Font Awesome](http://fortawesome.github.io/Font-Awesome/) et allez dans **Icons** pour obtenir le code.
+
+            Copiez le code et ajoutez-le à votre fichier HTML, à l'endroit où vous voulez qu'elle apparaisse. Dans ce cas, nous le voulons dans chaque item de la liste (`li`).
+
+            Pour cet exercice, ajoutez le crochet (ou l'icône de votre choix) à chaque item de la liste et utilisez la propriété CSS `color` pour changer la couleur des icônes *seulement*.
+
+            **Bonus:** Essayez de centrer les titres et les listes comme dans le [projet final](project/final.html).
+
+            **Bonus extra:** Essayez de changer la couleur des sous-titres `h4`.
+
+            Votre page devrait ressembler à ceci [Exemple 11](project/examples/11-icon-fonts.html).
+        </section>
+
+        <section class="slide centered" data-markdown>
+            ![](framework/img/workshop/now-what.gif)
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Les prochaines étapes
+
+            Même si nous avons couvert un tas de matériel aujourd'hui, il existe encore plein de façons de personnaliser et polir votre CV HTML. Voici quelques options supplémentaires que vous pouvez essayer:
+
+            1. L'exemple final a une option de cercle pour présenter vos compétences. Voyez les instructions [ici](framework/extras-circles.html).
+
+            2. Essayez un peu plus d'[effet d'animation](framework/extras-animations.html).
+
+            3. Ajoutez un [favicon](http://blog.teamtreehouse.com/how-to-make-a-favicon).
+
+            4. Stylisez votre lien de téléchargement comme un bouton. [Voyez les instructions ici](framework/extras-download-btn.html).
+
+            Aussi, il y a plusieurs façons de sélectionner des éléments qui vont plus loin que les sélecteurs enfant, les classes et les ids. Voyez quelques exemples [ici](framework/extras-advanced-selectors.html).
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Resources
+
+            Voici quelques ressources pour allez plus en profondeur dans le HTML & CSS:
+
+            * [Learn to Code HTML & CSS](http://learn.shayhowe.com/)
+            * [Codecademy](http://www.codecademy.com/)
+            * [Treehouse](http://teamtreehouse.com/)
+            * [Code School](https://www.codeschool.com/)
+            * [HTML and CSS: Design & Build Websites](http://www.htmlandcssbook.com/) (book)
+            * [CodePen](http://codepen.io/)
+            * [CSSDeck](http://cssdeck.com)
+
+        </section>
+
+        <section class="slide" data-markdown>
+            ##Mettre votre site en ligne
+
+            Vous aurez besoin d'enregistrer un nom de domaine (www.monsite.com) et d'acheter de l'hébergement. Voici quelques options de registraire et d'hébergement:
+
+            * [hover.com](hover.com/ladiescode)
+            * [dreamhost.com](http://www.dreamhost.com/r.cgi?205190)
+
+            Pour mettre vos fichiers en ligne, vous aurez besoin dw téléverser vos fichiers vers votre serveur d'hébergement, nouvellement acheté ! Il y a quelques informations dont vous aurez besoin et elles sont généralement fournies par votre fournisseur d'hébergement.
+
+            * FTP Address
+            * Username
+            * Password
+
+            Voici quelques tutoriels sur comment mettre vos fichiers en ligne: [FTP For Beginners: How to Upload Your Files](http://webdesign.com/ftp-for-beginners-how-to-upload-your-files/)
+
+            Vous vous sentez aventureux? Essayez [Hosting Static Sites on Github for Beginners](http://thephuse.com/development/hosting-static-sites-on-github-for-beginners/).
+
+        </section>
+
+        <!-- Last slide -->
+        <section class="slide last">
+            <h2>Merci!</h2>
+
+            <h2 class="title">
+                <span class="title-bg">Les bases du CSS</span><br>
+                <span class="title-bg">pour débutants</span>
+            </h2>
+            <h3><span>avec</span> Christina Truong</h3>
+
+            <img class="instructor-img" src="framework/img/christina-truong.jpg" alt="Christina Truong">
+            <ul>
+                <li><i class="fa fa-envelope"></i><a href="mailto:hello@christinatruong.com">hello@christinatruong.com</li>
+                <li><i class="fa fa-desktop"></i><a href="http://christinatruong.com">christinatruong.com</a></li>
+                <li><i class="fa fa-twitter"></i><a href="http://twitter.com/christinatruong">@christinatruong</a></li>
+            </ul>
+
+            <p class="attribution">Slidedecks créés avec <a href="https://github.com/LeaVerou/csss">Lea Verou's CSS-based SlideShow System</a> et <a href="http://lab.hakim.se/reveal-js/">reveal.js</a>.</p>
+        </section>
+    </main>
+
+
+    <footer>
+        <p class="license"><a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" src="framework/img/cc-by-nc.svg" /></a> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://ladieslearningcode.com" property="cc:attributionName" rel="cc:attributionURL">Ladies Learning Code</a></p>
+        <p class="instructions">Utilisez les flèches gauche <i class="fa fa-arrow-left"></i> et droite <i class="fa fa-arrow-right"></i> pour naviguer</p>
+    </footer>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="framework/scripts/slideshow.js"></script>
+
+    <!-- Uncomment the plugins you need -->
+    <script src="framework/scripts/plugins/css-edit.js"></script>
+    <script src="framework/scripts/plugins/css-snippets.js"></script>
+    <script src="framework/scripts/plugins/css-controls.js"></script>
+    <!-- <script src="plugins/code-highlight.js"></script>-->
+
+    <script src="framework/scripts/plugins/markdown/marked.js"></script>
+    <script src="framework/scripts/plugins/markdown/markdown.js"></script>
+    <script src="framework/scripts/plugins/highlight/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- Prettify -->
+    <script src="framework/scripts/plugins/prettify.js"></script>
+    <script src="framework/scripts/plugins/lang-css.js"></script>
+    <script src="framework/scripts/plugins/prism.js"></script>
+
+    <script>
+        var slideshow = new SlideShow();
+
+        // Grabs all the .snippet elements
+        var snippets = document.querySelectorAll('.snippet');
+        for(var i=0; i<snippets.length; i++) {
+            new CSSSnippet(snippets[i]);
+        }
+
+        // Opens all links in a new window
+        var links = document.getElementsByTagName("a");
+        for (var i = 0; i < links.length; i++) {
+            var link = links[i];
+            link.addEventListener(function() {
+                window.open(this.href);
+            });
+        }
+
+        jQuery(document).ready(function(){
+            jQuery(".snippet").before("<span class=\"edit\">Modifie-moi</span>");
+        });
+    </script>
+</body>
+</html>
