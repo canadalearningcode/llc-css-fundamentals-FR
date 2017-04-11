@@ -841,7 +841,7 @@ Le contenu est centré, mais l'arrière-plan (*background colour*) est restreint
 ```
 &lt;section class="profile"&gt;
     &lt;div class="content-wrap"&gt;&lt;!-- new content wrap div --&gt;
-ƒ
+
         &lt;img src="images/profile-generic.jpg" alt="Your Name"&gt;
         &lt;div class="summary"&gt;
             ...
@@ -1174,7 +1174,7 @@ max-width: 1000px;</textarea>
 
             Que ce passe-t-il quand les éléments sont mis en `float`? L'**élément parent** s'effondre donc assurez-vous de *fixer* ceci aussi!
 
-            ```
+            ```xml
             &lt;div class=&quot;item&quot;&gt;
                 &lt;div class=&quot;details&quot;&gt;
                     Nom de la compagnie, date, etc
@@ -1228,7 +1228,7 @@ max-width: 1000px;</textarea>
                 <li>Modifiez les sections <strong>Expérience de travail</strong> et<strong>Éducation</strong> avec la même couleur d'arrière-plan. L'exemple de projet utilise un gris très pâle (#fefefc).</li>
                 <li>Modifiez la couleur de la police d'écriture des sections Profil, Compétences &amp; Contact à blanc ou #ffffff. (Essayez de combiner les sélecteurs pour les styles partagés.)</li>
                 <li>Ajoutez une image d'arrière-plan à la section <strong>Compétences</strong>. Ne vous inquiétez pas à propos de l'effet de superposition pour l'instant, ajoutez simplement l'image.</li>
-                <li>Ajoutez un soulignement aux titres <code>&amp;lt;h2&gt;</code>, de couleur #cccccc ou d'une couleur de votre choix </li>
+                <li>Ajoutez un soulignement aux titres <code>&lt;h2&gt;</code>, de couleur #cccccc ou d'une couleur de votre choix </li>
                 <li>Modifiez la couleur d'arrière-plan de la section Contact. Utilisez #111111 ou une couleur de votre choix.</li>
                 <li>Choississez une couleur accent et appliquez-la à tous vos liens (élément <code>a</code>).</li>
             </ol>
@@ -1472,13 +1472,13 @@ Voir plus bas pour le code final, mais seulement si vous êtes bloqué!
             Utilisez une balise *anchor* pour lier votre fichier PDF. Vous pouvez aussi ajouter le nouvel attribut HTML5 `download` pour déclencher le téléchargement tout de suite! Aussi, donnez-lui une classe pour lui appliquer un style unique.
 
             ```xml
-            &lt;a class="download" href=&quot;resume.pdf&quot; download&gt;Download resume (pdf)&lt;/a>
+            &lt;a class="download" href=&quot;resume.pdf&quot; download&gt;Download resume (pdf)&lt;/a&gt;
             ```
         </section>
         <section class="slide">
             <h2>Exercice pratique: Positionner et styler le lien de téléchargement</h2>
 
-            <p>Utilisez le positionnement `fixed` sur le lien pour le rendre toujours disponible pendant que l'utilisateur fait défiler la page. </p>
+            <p>Utilisez le positionnement <code>fixed</code> sur le lien pour le rendre toujours disponible pendant que l'utilisateur fait défiler la page. </p>
 
             <p>Quelles propriétés &amp; valeures sont nécessaire pour positionner cet élément en haut à droite de la page?</p>
 
